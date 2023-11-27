@@ -1,0 +1,29 @@
+{% extends 'rike_menu/base.html' %}
+{% load static i18n %}
+
+
+{% block title %}კერძები{% endblock %}
+
+{% block body %}
+<div class="body">
+    <div class="container ">
+        <div class="item">
+           {% for drink in drink %}
+           <div class="item-object">
+               {% if drink.photo %}
+                <img src="{{ drink.photo.url }}" alt="categories photo">
+               {% else %}
+                    <p>No photo available</p>
+               {% endif %}
+           </div>
+            <div class="item-info">
+                <p class="item-name">{{ drink.title }}</p>
+                <p class="item-price">{{ drink.price }}₾</p>
+            </div>
+           {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'rike_menu/base.html' %}
+{% load static i18n %}
+
+
+{% block title %}კერძები{% endblock %}
+
+{% block body %}
+<div class="body">
+    <div class="container">
+       <div class="category">
+           {% for cat in dishcat %}
+           <div class="cat-object">
+                <div class="cat-name">
+                    <a href="{% url 'DishItem' category_id=cat.id %}" style="color: white;">{{ cat.title }}</a>
+                </div>
+               {% if cat.photo %}
+               <a href="{% url 'DishItem' category_id=cat.id %}">
+                    <img src="{{ cat.photo.url }}" alt="categories photo">
+               </a>
+               {% else %}
+                    <a href="{% url 'DishItem' category_id=cat.id %}"><p>No photo available</p></a>
+               {% endif %}
+           </div>
+           {% endfor %}
+       </div>
+    </div>
+</div>
+<br>
+{% endblock %}

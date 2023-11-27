@@ -1,0 +1,80 @@
+{% load static %}
+{% load i18n %}
+{% load static i18n %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'rike_menu/css/main.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="header-photo">
+        <img class="backgroung-img" src="{% static "rike_menu/img/background-image.jpg" %}" alt="background-image">
+        <img class="logo" src="{% static "rike_menu/img/logo.jpg" %}" width="142px" height="142px" alt="logo">
+        <form class="translate-form" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                {% if language.code == 'ka' %}
+                    <button type="submit" name="language" value="{{ language.code }}">
+                        <img class="ka" src="{% static 'rike_menu/img/georgia-flag.png' %}" alt="{{ language.code }}">
+                        <input type="hidden" name="target_language" value="en">
+                    </button>
+                {% elif language.code == 'en' %}
+                    <button type="submit" name="language" value="{{ language.code }}">
+                        <img class="uk" src="{% static 'rike_menu/img/uk-flag.png' %}" alt="{{ language.code }}">
+                        <input type="hidden" name="target_language" value="ka">
+                    </button>
+                {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+
+    <div class="header-info">
+        <div class="rest-name"><h1>{% trans 'რესტორანი “რიყე” ' %}</h1></div>
+        <div class="rest-info">
+            <div class="location">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                      <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                      <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    {% trans 'საჩხერე, ჩიხა, საჩხერე, საქართველო' %}
+                </p>
+            </div>
+            <div class="phone-number">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                    +995 558 31 12 16
+                </p>
+            </div>
+            <div class="wifi">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16">
+                      <path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049z"/>
+                      <path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.455 9.455 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065zm-2.183 2.183c.226-.226.185-.605-.1-.75A6.473 6.473 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.478 5.478 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091l.016-.015zM9.06 12.44c.196-.196.198-.52-.04-.66A1.99 1.99 0 0 0 8 11.5a1.99 1.99 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
+                    </svg>
+                    60995117
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="categories">
+        <div class="dish-cat"><a style="color: #8B4513" href="{% url 'DishCat' %}">{% trans 'კერძები' %}</a></div>
+        <div class="drink-cat"><a style="color: #8B4513" href="{% url 'DrinksCat' %}">{% trans 'სასმელები' %}</a></div>
+    </div>
+    <div class="body">
+    {% block body %}
+    {% endblock %}
+    </div>
+</body>
+</div>
+</html>
