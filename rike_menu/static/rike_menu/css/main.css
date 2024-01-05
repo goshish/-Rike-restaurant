@@ -225,6 +225,11 @@ button{
     box-shadow: 1px 1px 1px 1px #dbdbdb;
 }
 
+.item-object img {
+    width: 100%;
+    height: 100%;
+}
+
 @media (max-width:980px){
     .container{
         max-width: 100%;
@@ -305,11 +310,23 @@ button{
         font-size: 50px;
         min-width: 800px;
     }
+
+    .item-object img{
+        height: 100%;
+        width: 100%;
+    }
+
     .item-info{
         font-size: 50px;
     }
     .item-price{
-        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 20px;
+        margin-left: 80px;
     }
 }
 

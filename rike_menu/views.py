@@ -37,6 +37,7 @@ class DrinkItem(ListView):
     context_object_name = 'drink'
 
     def get_queryset(self):
-        return Drink.objects.all()
+        category = get_object_or_404(DrinkCategory, id=self.kwargs['category_id'])
+        return Drink.objects.filter(category=category)
 
 
